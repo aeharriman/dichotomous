@@ -3,11 +3,11 @@ import InputForm from "../InputForm/InputForm";
 import './InputPage.css';
 import ButtonTree from "../ButtonTree/ButtonTree";
 import { useEffect } from "react";
+import { KeyObject } from "../../Utils/Interfaces";
 
 
 // set dichotomousKey to interface later
-function InputPage ({dichotomousKey, setDichotomousKey}:{dichotomousKey: string | undefined, setDichotomousKey:React.Dispatch<React.SetStateAction<string|undefined>>}) {
-
+function InputPage ({dichotomousKey, setDichotomousKey}:{dichotomousKey: KeyObject | undefined, setDichotomousKey:React.Dispatch<React.SetStateAction<KeyObject|undefined>>}) {
 
 
 return (dichotomousKey === undefined) ? 
