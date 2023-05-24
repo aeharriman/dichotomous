@@ -7,7 +7,7 @@ import InputPage from './Components/InputPage/InputPage';
 function App() {
 
   // change any to dichotomousKey inteface after creating that
-  const [dichotomousKey, setDichotomousKey] = useState<any | undefined>()
+  const [dichotomousKey, setDichotomousKey] = useState<string | undefined>()
 
 
   return (
