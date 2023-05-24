@@ -2,12 +2,13 @@ import React, {useState} from "react";
 import logo from './logo.svg';
 import './App.css';
 import InputPage from './Components/InputPage/InputPage';
+import { KeyObject } from "./Utils/Interfaces";
 
 
 function App() {
 
-  // change any to dichotomousKey inteface after creating that
-  const [dichotomousKey, setDichotomousKey] = useState<string | undefined>()
+  // change any to dichotomousKey interface after creating that
+  const [dichotomousKey, setDichotomousKey] = useState<KeyObject | undefined>()
 
 
   return (
