@@ -1,9 +1,13 @@
 import Description from "../Description/Description";
 import InputForm from "../InputForm/InputForm";
 import './InputPage.css';
+import ButtonTree from "../ButtonTree/ButtonTree";
+import { useEffect } from "react";
+
 
 // set dichotomousKey to interface later
-function InputPage ({dichotomousKey, setDichotomousKey}:{dichotomousKey: any, setDichotomousKey:React.Dispatch<React.SetStateAction<any|undefined>>}) {
+function InputPage ({dichotomousKey, setDichotomousKey}:{dichotomousKey: string | undefined, setDichotomousKey:React.Dispatch<React.SetStateAction<string|undefined>>}) {
+
 
 
 return (dichotomousKey === undefined) ? 
@@ -19,8 +23,13 @@ return (dichotomousKey === undefined) ?
     <>
         <div className="container p-5" id="container">
             <Description />
+            <ButtonTree 
+                dichotomousKey={dichotomousKey}
+                setDichotomousKey={setDichotomousKey}
+            />
         </div>
     </>
+
 }
 
 export default InputPage
