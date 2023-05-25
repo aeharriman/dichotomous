@@ -1,0 +1,31 @@
+1.a. Fish has one dorsal fin ....................... 2
+
+1.b. Forked two dorsal fins ....................... 4
+
+2.a. Fish is spotted ....................... northern pike
+
+2.b. Fish is striped ....................... 3
+
+3.a. Fish has dark stripes ....................... tiger muskie
+
+3.b. Fish has light stripes ....................... muskellunge
+
+4.a. Fish does not have spots ....................... 5
+
+4.b. Fish has spots .......................  6
+
+5.a. Fish has large first dorsal fin ....................... walleye
+
+5.b. Fish has large second dorsal fin ....................... largemouth bass
+
+6.a. Fish has light spots ....................... brook trout
+
+6.b. Fish has dark spots ....................... 7
+
+7.a. Fish has more spots near or on tail ....................... cutthroat trout
+
+7.b. Fish does not have more spots on or near tail .......................8
+
+8.a. Fish has light area in middle .......................rainbow trout
+
+8.b. Fish does not have light area in middle ....................... brown trout

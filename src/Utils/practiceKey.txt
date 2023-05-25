@@ -1,0 +1,10 @@
+1.a. bird .............. 2
+1.b. fish .................. 3
+3.a. fast boi ......... flying fish
+3.b. smooth boi ............... ray
+1.c. mammal ...................... human
+2.a. dumb ........................... penguin
+2.b. smart ...................... raptor
+2.c. regular joe ...................... 4
+4.a. blue .................... blue bird
+4.b. red ......................... cardinal
