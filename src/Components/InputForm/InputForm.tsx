@@ -8,7 +8,7 @@ import { KeyObject } from '../../Utils/Interfaces';
 // This component takes input from a form and parses it into dichotomousKey on submit. 
 // It is rendered conditionally from InputPage, and disappears when dichotomousKey is defined
 
-function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject|undefined, setDichotomousKey:React.Dispatch<React.SetStateAction<KeyObject|undefined>>}) {
+function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject, setDichotomousKey:React.Dispatch<React.SetStateAction<KeyObject>>}) {
 
     const placeholder: string = 
 `1.a. found in water ................................. 2

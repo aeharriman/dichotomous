@@ -7,10 +7,10 @@ import { KeyObject } from "../../Utils/Interfaces";
 
 
 // set dichotomousKey to interface later
-function InputPage ({dichotomousKey, setDichotomousKey}:{dichotomousKey: KeyObject | undefined, setDichotomousKey:React.Dispatch<React.SetStateAction<KeyObject|undefined>>}) {
+function InputPage ({dichotomousKey, setDichotomousKey}:{dichotomousKey: KeyObject, setDichotomousKey:React.Dispatch<React.SetStateAction<KeyObject>>}) {
 
 
-return (dichotomousKey === undefined) ? 
+return (Object.keys(dichotomousKey).length === 0) ? 
     <>
         <div className="container p-5" id="container">
             <Description />
