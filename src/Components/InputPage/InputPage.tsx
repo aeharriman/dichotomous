@@ -29,7 +29,6 @@ return (dichotomousKey === undefined) ?
             />
         </div>
     </>
-
 }
 
 export default InputPage

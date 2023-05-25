@@ -10,26 +10,26 @@ import { KeyObject } from '../../Utils/Interfaces';
 
 function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject|undefined, setDichotomousKey:React.Dispatch<React.SetStateAction<KeyObject|undefined>>}) {
 
-    const placeholder: string = `1.a. found in water ................................. 2
+    const placeholder: string = 
+`1.a. found in water ................................. 2
 
-    2.a. grows in salt water ................................. seaweed
+2.a. grows in salt water ................................. seaweed
         
-    2.b. does not grow in salt water .............................. water-lily
+2.b. does not grow in salt water .............................. water-lily
         
-    1.b. found on land ................................ 3
+1.b. found on land ................................ 3
         
-    3.a. real plant ....................... 4
+3.a. real plant ....................... 4
         
-    4.a. grows more than 50 m tall .................. fir tree
+4.a. grows more than 50 m tall .................. fir tree
         
-    4.b. grows less than 50 m tall ............................ 5
+4.b. grows less than 50 m tall ............................ 5
         
-    5.a. produces yellow flowers ............................... dandelion
+5.a. produces yellow flowers ............................... dandelion
         
-    5.b. does not produce yellow flowers ..........................apple tree
+5.b. does not produce yellow flowers ..........................apple tree
         
-    3.b. not a real plant ............................... astroturf
-    `
+3.b. not a real plant ............................... astroturf`
 
     // Making the text displayed in the form show the variable changed by editing the form
     const [form, setForm] = useState('')
@@ -37,6 +37,23 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
     const handleFormChange = (event:ChangeEvent<HTMLInputElement>) => {
         setForm(event.target.value)
     }
+
+    function process(input: string): string {
+        // Replace ellipsis with periods
+        let processed = input.replace(/…/g, '...');
+      
+        // Add a dot after number followed by letter or character
+        processed = processed.replace(/(\d)([a-z])/g, '$1.$2');
+      
+        // Add a space before and after sequence of periods
+        processed = processed.replace(/(\w)(\.{2,})(\w)/g, '$1 $2 $3');
+
+        // Ensure that every (number).(character) is followed by a period
+        processed = processed.replace(/(\d\.[a-z])([^\.]|$)/g, '$1.$2');
+      
+        return processed;
+      }
+      
 
     // This function turns the string from the form into an object
     const getFinalKey = (stringKey: string) : KeyObject => {
@@ -115,7 +132,7 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
     const handleSubmit = () => {
         if(form !== "")
         {
-            setDichotomousKey(getFinalKey(form))
+            setDichotomousKey(getFinalKey(process(form)))
             // console.log("set to form" + dichotomousKey)
         } else {
             setDichotomousKey(getFinalKey(placeholder))
