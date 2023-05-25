@@ -8,7 +8,7 @@ import { KeyObject } from "./Utils/Interfaces";
 function App() {
 
   // change any to dichotomousKey interface after creating that
-  const [dichotomousKey, setDichotomousKey] = useState<KeyObject | undefined>()
+  const [dichotomousKey, setDichotomousKey] = useState<KeyObject>({})
 
 
   return (

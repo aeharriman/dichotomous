@@ -3,7 +3,7 @@ import { KeyObject } from "../../Utils/Interfaces";
 import React, {ChangeEvent, useState, useEffect} from "react";
 import { error } from "console";
 
-function ButtonTree({dichotomousKey, setDichotomousKey}:{dichotomousKey: KeyObject|undefined, setDichotomousKey:React.Dispatch<React.SetStateAction<KeyObject|undefined>>}) {
+function ButtonTree({dichotomousKey, setDichotomousKey}:{dichotomousKey: KeyObject, setDichotomousKey:React.Dispatch<React.SetStateAction<KeyObject>>}) {
 
     const [currentIndex, setCurrentIndex] = useState<number>(1);
     const [isDone, setIsDone] = useState<boolean>(false);
@@ -13,7 +13,7 @@ function ButtonTree({dichotomousKey, setDichotomousKey}:{dichotomousKey: KeyObje
 
     // Sets Dichotomous key to undefined to trigger conditional rendering of parent component
     const handleGoBack = () => {
-        setDichotomousKey(undefined);
+        setDichotomousKey({});
     }
 
     const handlePrevious = () => {
@@ -38,19 +38,19 @@ function ButtonTree({dichotomousKey, setDichotomousKey}:{dichotomousKey: KeyObje
     // TODO: come up with a better way to check dichotomousKey isn't defined before everything
     const handleSelection = (currentSubKey: string) => {
         
-        if (dichotomousKey !== undefined && typeof dichotomousKey[currentIndex][currentSubKey].goTo === "number") {
+        if (typeof dichotomousKey[currentIndex][currentSubKey].goTo === "number") {
             const nextHistory:Array<number> = history;
             nextHistory.push(currentIndex);
             setHistory(nextHistory);
             setCurrentIndex(Number(dichotomousKey[currentIndex][currentSubKey].goTo));
-        } else if (dichotomousKey !== undefined && typeof dichotomousKey[currentIndex][currentSubKey].goTo === "string") {
+        } else if (typeof dichotomousKey[currentIndex][currentSubKey].goTo === "string") {
             const nextHistory:Array<number> = history;
             nextHistory.push(currentIndex);
             setHistory(nextHistory);
             setFinalSelection(String(dichotomousKey[currentIndex][currentSubKey].goTo));
             setIsDone(true);
         } else {
-            throw new Error("Invalid dichotomous key (3)");
+            throw new Error("Invalid dichotomous key (1)");
         }
         
     }
@@ -75,7 +75,7 @@ function ButtonTree({dichotomousKey, setDichotomousKey}:{dichotomousKey: KeyObje
         return buttons
     }
 
-    return (dichotomousKey !== undefined) ? 
+    return ( 
         <> 
         {/* <p>{JSON.stringify(dichotomousKey)}</p> */}
 
@@ -92,12 +92,7 @@ function ButtonTree({dichotomousKey, setDichotomousKey}:{dichotomousKey: KeyObje
         ) : <></>}
 
         <Button onClick={handleGoBack}>Go back to key entry page</Button>
-        </> :
-        <>
-        Something went extremely wrong. You have fallen into the deep recesses of the program, 
-        for this was only put here to make typescript happy and should not logically be possible.
-        Be afraid. Be very afraid.
-        </>
+        </> )
 
 }
 
