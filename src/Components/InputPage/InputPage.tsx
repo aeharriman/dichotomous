@@ -10,6 +10,8 @@ import { KeyObject } from "../../Utils/Interfaces";
 function InputPage ({dichotomousKey, setDichotomousKey}:{dichotomousKey: KeyObject, setDichotomousKey:React.Dispatch<React.SetStateAction<KeyObject>>}) {
 
 
+    // InputPage is the parent of Description, InputForm, and ButtonTree
+
 return (Object.keys(dichotomousKey).length === 0) ? 
     <>
         <div className="container p-5" id="container">

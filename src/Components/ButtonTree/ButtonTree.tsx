@@ -11,21 +11,26 @@ function ButtonTree({dichotomousKey, setDichotomousKey}:{dichotomousKey: KeyObje
     const [finalSelection, setFinalSelection] = useState<string>('');
     const [history, setHistory] = useState<Array<number>>([]);
 
-    // Sets Dichotomous key to undefined to trigger conditional rendering of parent component
+    // Sets Dichotomous key to length 0, triggers conditional rendering from parent component (InputPage)
+    // function for "Go Back to Key Entry Page" button click to call
     const handleGoBack = () => {
         setDichotomousKey({});
     }
 
+    // Function for "Previous" Button to call
     const handlePrevious = () => {
         if (history.length > 0) {
         setIsDone(false);
+        // Move history back
         setCurrentIndex(history[history.length-1]);
+        // Set current history to previous
         const previousHistory:Array<number> = history;
         previousHistory.pop();
         setHistory(previousHistory);
         }
     }
 
+    // When the history length changes, check if you are at start
     useEffect (() => {
         if (history.length != 0){
             setIsStart(true)
@@ -34,6 +39,7 @@ function ButtonTree({dichotomousKey, setDichotomousKey}:{dichotomousKey: KeyObje
             setIsStart(false)
         }
     },[history.length])
+
 
     // TODO: come up with a better way to check dichotomousKey isn't defined before everything
     const handleSelection = (currentSubKey: string) => {
@@ -50,6 +56,7 @@ function ButtonTree({dichotomousKey, setDichotomousKey}:{dichotomousKey: KeyObje
             setFinalSelection(String(dichotomousKey[currentIndex][currentSubKey].goTo));
             setIsDone(true);
         } else {
+            // TODO: handle this gracefully (maybe display a modal)
             throw new Error("Invalid dichotomous key (1)");
         }
         
