@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import logo from './logo.svg';
 import './App.css';
 import InputPage from './Components/InputPage/InputPage';
 import { KeyObject } from "./Utils/Interfaces";
@@ -7,10 +6,10 @@ import { KeyObject } from "./Utils/Interfaces";
 
 function App() {
 
-  // change any to dichotomousKey interface after creating that
   const [dichotomousKey, setDichotomousKey] = useState<KeyObject>({})
 
-
+// If using react-router,
+    //   <Route component={withAuthenticationRequired(component)} {...args} />
   return (
         <InputPage 
             dichotomousKey={dichotomousKey}

@@ -1,7 +1,6 @@
 import { Button } from "react-bootstrap"
 import { KeyObject } from "../../Utils/Interfaces";
-import React, {ChangeEvent, useState, useEffect} from "react";
-import { error } from "console";
+import React, {useState, useEffect} from "react";
 
 function ButtonTree({dichotomousKey, setDichotomousKey}:{dichotomousKey: KeyObject, setDichotomousKey:React.Dispatch<React.SetStateAction<KeyObject>>}) {
 
@@ -32,7 +31,7 @@ function ButtonTree({dichotomousKey, setDichotomousKey}:{dichotomousKey: KeyObje
 
     // When the history length changes, check if you are at start
     useEffect (() => {
-        if (history.length != 0){
+        if (history.length !== 0){
             setIsStart(true)
             console.log(history.length)
         } else {

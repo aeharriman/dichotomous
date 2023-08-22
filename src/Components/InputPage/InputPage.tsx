@@ -2,7 +2,6 @@ import Description from "../Description/Description";
 import InputForm from "../InputForm/InputForm";
 import './InputPage.css';
 import ButtonTree from "../ButtonTree/ButtonTree";
-import { useEffect } from "react";
 import { KeyObject } from "../../Utils/Interfaces";
 
 
