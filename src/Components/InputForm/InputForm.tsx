@@ -77,7 +77,6 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
 2.c. regular joe ...................... 4
 4.a. blue .................... blue bird
 4.b. red ......................... cardinal`,
-        // ... add more tabs as needed
     };
 
     type TabKeys = 'default' | 'tab1' | 'tab2';
