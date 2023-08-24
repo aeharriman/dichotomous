@@ -129,12 +129,12 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
         (async () => {
             try {
                 const token = await getAccessTokenSilently();
-                const response = await axios.get('YOUR_BACKEND_API_URL', {
+                const response = await axios.get('http://localhost:6565/api/keys', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                setActiveKeys(prevKeys => [...prevKeys, ...response.data.keys]);
+                setActiveKeys(prevKeys => [...prevKeys, ...response.data]);
             } catch (e) {
                 console.error('Failed to fetch keys:', e);
             }
