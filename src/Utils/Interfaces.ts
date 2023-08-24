@@ -1,4 +1,3 @@
-// interface 
 export interface KeyObject {
     [mainKey: number]: {
       [subKey: string]: {
@@ -7,3 +6,8 @@ export interface KeyObject {
       };
     };
   }
+
+export interface NamedStringKey {
+    name: string;
+    key: string;
+}

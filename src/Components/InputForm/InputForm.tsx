@@ -4,18 +4,23 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import React, {ChangeEvent, useState} from "react";
-import { KeyObject } from '../../Utils/Interfaces';
+import React, {ChangeEvent, useEffect, useState} from "react";
+import { KeyObject, NamedStringKey } from '../../Utils/Interfaces';
+import {useAuth0} from "@auth0/auth0-react";
+import axios from "axios";
 
 // This component takes input from a form and parses it into dichotomousKey on submit. 
 // It is rendered conditionally from InputPage, and disappears when dichotomousKey is defined
 
 function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject, setDichotomousKey:React.Dispatch<React.SetStateAction<KeyObject>>}) {
 
-    const [activeTab, setActiveTab] = useState<TabKeys>('default');
+    const [activeTab, setActiveTab] = useState<string>('default');
 
-    const placeholders = {
-        default: `1.a. found in water ................................. 2
+    const { user, isAuthenticated, getAccessTokenSilently } = useAuth0(); // Auth0 hook to get the access token
+
+    const [activeKeys, setActiveKeys] = useState<NamedStringKey[]>([{
+        name: 'default',
+        key: `1.a. found in water ................................. 2
 
 2.a. grows in salt water ................................. seaweed
         
@@ -33,9 +38,11 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
         
 5.b. does not produce yellow flowers ..........................apple tree
         
-3.b. not a real plant ............................... astroturf`,
+3.b. not a real plant ............................... astroturf`},
 
-        tab1: `1.a. Fish has one dorsal fin ....................... 2
+{
+    name: 'tab1',
+    key: `1.a. Fish has one dorsal fin ....................... 2
 
 1.b. Forked two dorsal fins ....................... 4
 
@@ -65,9 +72,10 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
 
 8.a. Fish has light area in middle .......................rainbow trout
 
-8.b. Fish does not have light area in middle ....................... brown trout`,
-
-        tab2: `1.a. bird .............. 2
+8.b. Fish does not have light area in middle ....................... brown trout`},
+        {
+        name: 'tab2',
+        key: `1.a. bird .............. 2
 1.b. fish .................. 3
 3.a. fast boi ......... flying fish
 3.b. smooth boi ............... ray
@@ -77,11 +85,29 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
 2.c. regular joe ...................... 4
 4.a. blue .................... blue bird
 4.b. red ......................... cardinal`,
-    };
+    }]);
 
-    type TabKeys = 'default' | 'tab1' | 'tab2';
+    const placeholder = `1.a. found in water ................................. 2
 
-    const placeholder = placeholders[activeTab];
+2.a. grows in salt water ................................. seaweed
+        
+2.b. does not grow in salt water .............................. water-lily
+        
+1.b. found on land ................................ 3
+        
+3.a. real plant ....................... 4
+        
+4.a. grows more than 50 m tall .................. fir tree
+        
+4.b. grows less than 50 m tall ............................ 5
+        
+5.a. produces yellow flowers ............................... dandelion
+        
+5.b. does not produce yellow flowers ..........................apple tree
+        
+3.b. not a real plant ............................... astroturf`;
+
+    const activeDKey: NamedStringKey | undefined = activeKeys.find(tab => tab.name === activeTab);
 
 
     // Making the text displayed in the form show the variable changed by editing the form
@@ -91,22 +117,48 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
         setForm(event.target.value)
     }
 
+    // Sets textarea to "key" from NamedStringKey set by "name" in activeTab
+    useEffect(() => {
+        const foundTab = activeKeys.find(tab => tab.name === activeTab);
+        if (foundTab) {
+            setForm(foundTab.key);
+        }
+    }, [activeTab, activeKeys]);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const token = await getAccessTokenSilently();
+                const response = await axios.get('YOUR_BACKEND_API_URL', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setActiveKeys(prevKeys => [...prevKeys, ...response.data.keys]);
+            } catch (e) {
+                console.error('Failed to fetch keys:', e);
+            }
+        })();
+    }, [getAccessTokenSilently]);
+
+
+
     function process(input: string): string {
         // Replace ellipsis with periods
         let processed = input.replace(/…/g, '...');
-      
+
         // Add a dot after number followed by letter or character
         processed = processed.replace(/(\d)([a-z])/g, '$1.$2');
-      
+
         // Add a space before and after sequence of periods
         processed = processed.replace(/(\w)(\.{2,})(\w)/g, '$1 $2 $3');
 
         // Ensure that every (number).(character) is followed by a period
         processed = processed.replace(/(\d\.[a-z])([^.]|$)/g, '$1.$2');
-      
+
         return processed;
       }
-      
+
 
     // This function turns the string from the form into an object
     const getFinalKey = (stringKey: string) : KeyObject => {
@@ -123,7 +175,7 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
             if (lines !== null) {
 
                 lines.forEach(line => {
-                    
+
                     // Remove any leading/trailing whitespace
                     line = line.trim();
 
@@ -131,7 +183,7 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
                     const [identifierText = '', target = ''] = line.split(/ *\.{2,} */).map(part => part.trim());
                     const [identifier = '', text = ''] = identifierText.split(/\.\s+(?=[^.]+$)/).map(part => part.trim());
                     const [mainKeyText, subKey] = identifier.split('.');
-                    
+
                     // Learned here that JSON keys HAVE to be strings and will convert automatically, 
                     // and even Javascript keys act as strings under the hood, making this unnecessary.
                     // I kept it in though because it is technically a number and I want my interface to reflect that.
@@ -174,7 +226,7 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
                 //     }
                 // }
                 return parsed;
-            } else { 
+            } else {
                 throw new Error("Invalid dichotomous key (1)");
             }
         } else {
@@ -183,29 +235,25 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
     }
 
     const handleSubmit = () => {
-        if(form !== "")
-        {
-            setDichotomousKey(getFinalKey(process(form)))
-            // console.log("set to form" + dichotomousKey)
+        if (form !== "") {
+            setDichotomousKey(getFinalKey(process(form)));
         } else {
-            setDichotomousKey(getFinalKey(placeholder))
-            // This doesn't log the new value immediately because setState functions only schedule state updates for the next render
-            // console.log("set to key" + dichotomousKey) 
+            if (activeDKey) {
+                setDichotomousKey(getFinalKey(activeDKey.key));
+            } else {
+                console.log("Tab selection logic not working as expected")
+            }
         }
-    } 
-
-    // This didn't work because the component unmounts immediately after setting dichotomousKey
-    // useEffect(() => {
-    //     console.log('dichotomousKey changed: ', dichotomousKey);
-    //   }, [dichotomousKey]);
+    }
 
     return (
       <Form onSubmit={event => {event.preventDefault()}}>
           <Form.Label>Try these samples:</Form.Label>
-          <Tabs activeKey={activeTab} onSelect={(k) => setActiveTab(k as TabKeys)}>
-              <Tab eventKey="default" title="Default"></Tab>
-              <Tab eventKey="tab1" title="Tab 1"></Tab>
-              <Tab eventKey="tab2" title="Tab 2"></Tab>
+          <Tabs activeKey={activeTab} onSelect={(k) => setActiveTab(k ?? "default")}>
+              {activeKeys.map((activeKeyObj, index) => (
+                  <Tab eventKey={activeKeyObj.name} title={activeKeyObj.name} key={index}>
+                  </Tab>
+              ))}
           </Tabs>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
           <Form.Control style={{color:'rgb(192, 225, 188)', padding: '3rem'}} as="textarea" placeholder={placeholder} value={form} onChange={handleFormChange} rows={15} />
