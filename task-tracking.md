@@ -375,11 +375,11 @@ Completed - added transformIgnorePatterns for axios to jest in package.json
 InputPage - rendering
 
 ### Shall:
-- [ ] Shall render description and input form when the state of the dichotomousKey is at length 0
-- [ ] Shall render description and ButtonTree when the dichotomousKey state is length over 0
+- [X] Shall render description and input form when the state of the dichotomousKey is at length 0
+- [X] Shall render description and ButtonTree when the dichotomousKey state is length over 0
 
 ### Progress:
-TODO
+Complete
 
 ---
 
@@ -387,10 +387,10 @@ TODO
 InputForm - Auth0Provider
 
 ### Shall:
-- [ ] Shall mock `useAuth0` function to simulate auth0 functionality
-- [ ] Shall run all tests without throwing "Failed to fetch keys: Error: You forgot to wrap your component in <Auth0Provider>.
+- [X] Shall mock `useAuth0` function to simulate auth0 functionality
+- [X] Shall run all tests without throwing "Failed to fetch keys: Error: You forgot to wrap your component in <Auth0Provider>.
   at getAccessTokenSilently"
 
 ### Progress:
-TODO
+Complete
 
