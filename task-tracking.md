@@ -353,7 +353,7 @@ TODO
 InputForm - UI/UX
 
 ### Shall:
-- [ ] Shall render all Bootstrap components without error
+- [X] Shall render all relevant components without error
 - [ ] Shall allow text input in the textarea
 - [ ] Shall prevent default form submission behavior
 
