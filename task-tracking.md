@@ -284,6 +284,7 @@ InputForm - Auth0 User Authentication
 - [ ] Shall not throw any errors related to Auth0 user authentication in the console
 - [ ] Shall successfully retrieve an access token when a user is authenticated
 - [ ] Shall not make an axios request when the user is not authenticated
+- [ ] Shall correctly request a new access token when the existing one expires
 
 ### Progress:
 TODO
@@ -311,6 +312,7 @@ InputForm - Tabs Functionality
 - [ ] Shall correctly display tabs for each active key present in the activeKeys state
 - [ ] Shall set the `activeTab` state to the clicked tab's event key
 - [ ] Shall update the `form` state when a new tab is selected to reflect the selected key's content
+- [ ] Shall automatically select the first tab as the default active tab
 
 ### Progress:
 TODO
@@ -332,12 +334,15 @@ TODO
 ---
 
 ### Name:
-InputFrom - Axios Integration
+InputForm - Axios Integration
 
 ### Shall:
 - [ ] Shall successfully make a GET request to the given URL
 - [ ] Shall update the `activeKeys` state with the keys retrieved from the server
 - [ ] Shall catch and log errors to the console in case of a failure
+- [ ] Shall handle server timeouts
+- [ ] Shall handle different types of HTTP response status codes other than success (2xx)
+- [ ] Shall merge retrieved keys correctly with pre-existing keys in the `activeKeys` state
 
 ### Progress:
 TODO
