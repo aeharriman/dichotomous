@@ -3,16 +3,6 @@
 Task tracking started on 9/5/23.
 
 ---
-### Name:
-Fix axios import error
-
-### Shall:
- - [ ] Shall run all InputPage Component tests without causing "SyntaxError: Cannot use import statement outside a module" on the console
-
-### Progress: 
-TODO
-
----
 ## ButtonTree
 ---
 
@@ -371,11 +361,35 @@ TODO
 ---
 
 ### Name:
+InputPage - Fix axios import error
+
+### Shall:
+- [X] Shall run all InputPage Component tests without causing "SyntaxError: Cannot use import statement outside a module" on the console
+
+### Progress:
+Completed - added transformIgnorePatterns for axios to jest in package.json
+
+---
+
+### Name:
 InputPage - rendering
 
 ### Shall:
 - [ ] Shall render description and input form when the state of the dichotomousKey is at length 0
 - [ ] Shall render description and ButtonTree when the dichotomousKey state is length over 0
+
+### Progress:
+TODO
+
+---
+
+### Name:
+InputForm - Auth0Provider
+
+### Shall:
+- [ ] Shall mock `useAuth0` function to simulate auth0 functionality
+- [ ] Shall run all tests without throwing "Failed to fetch keys: Error: You forgot to wrap your component in <Auth0Provider>.
+  at getAccessTokenSilently"
 
 ### Progress:
 TODO
