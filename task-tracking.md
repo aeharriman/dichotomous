@@ -355,7 +355,7 @@ InputForm - UI/UX
 ### Shall:
 - [X] Shall render all relevant components without error
 - [X] Shall allow text input in the textarea
-- [ ] Shall prevent default form submission behavior and call handleSubmit
+- [ ] Shall call handleSubmit when submit button clicked
 
 ### Progress:
 TODO
