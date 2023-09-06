@@ -244,9 +244,8 @@ Form validation and submission needs to work as expected
 [//]: # (- [X] setDichotomousKey, when a valid dichotomous key string is in the textarea, shall be called with a KeyObject on submit)
 [//]: # (- [ ] Shall call handleSubmit when submit button clicked)
 
-
 ### Progress:
-TODO
+Completed 9/6/23
 
 ---
 

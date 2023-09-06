@@ -14,6 +14,49 @@ jest.mock("@auth0/auth0-react", () => ({
 jest.mock('axios');
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
+const defaultKeyText: string = `1.a. found in water ................................. 2
+
+2.a. grows in salt water ................................. seaweed
+        
+2.b. does not grow in salt water .............................. water-lily
+        
+1.b. found on land ................................ 3
+        
+3.a. real plant ....................... 4
+        
+4.a. grows more than 50 m tall .................. fir tree
+        
+4.b. grows less than 50 m tall ............................ 5
+        
+5.a. produces yellow flowers ............................... dandelion
+        
+5.b. does not produce yellow flowers ..........................apple tree
+        
+3.b. not a real plant ............................... astroturf`;
+
+const expectedKey: KeyObject  = {
+    '1': {
+        'a': { text: 'found in water', goTo: 2 },
+        'b': { text: 'found on land', goTo: 3 }
+    },
+    '2': {
+        'a': { text: 'grows in salt water', goTo: 'seaweed' },
+        'b': { text: 'does not grow in salt water', goTo: 'water-lily' }
+    },
+    '3': {
+        'a': { text: 'real plant', goTo: 4 },
+        'b': { text: 'not a real plant', goTo: 'astroturf' }
+    },
+    '4': {
+        'a': { text: 'grows more than 50 m tall', goTo: 'fir tree' },
+        'b': { text: 'grows less than 50 m tall', goTo: 5 }
+    },
+    '5': {
+        'a': { text: 'produces yellow flowers', goTo: 'dandelion' },
+        'b': { text: 'does not produce yellow flowers', goTo: 'apple tree' }
+    }
+};
+
 describe('<InputForm />', () => {
     const mockDichotomousKey: KeyObject = {};
     const setDichotomousKey = jest.fn();
@@ -50,6 +93,10 @@ describe('<InputForm />', () => {
     it('should call setDichotomousKey with a non-empty form', async () => {
         render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
 
+        // Unnecessary but added to make test less fragile in case default tab text changes in app.
+        let element = screen.getByPlaceholderText(/1.a. found in water/) as HTMLTextAreaElement;
+        fireEvent.change(element, { target: { value: defaultKeyText } });
+
         const submitButton = screen.getByRole('button', { name: 'Submit' });
         await userEvent.click(submitButton);
 
@@ -74,33 +121,14 @@ describe('<InputForm />', () => {
     it('should set the dichotomousKey state correctly upon submission', async () => {
         render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
 
+        // Unnecessary but added to make test less fragile in case default tab text changes in app.
+        let element = screen.getByPlaceholderText(/1.a. found in water/) as HTMLTextAreaElement;
+        fireEvent.change(element, { target: { value: defaultKeyText } });
+
         const submitButton = screen.getByRole('button', { name: 'Submit' });
         await userEvent.click(submitButton);
 
-        const expected: KeyObject  = {
-                '1': {
-                  'a': { text: 'found in water', goTo: 2 },
-                  'b': { text: 'found on land', goTo: 3 }
-                },
-                '2': {
-                  'a': { text: 'grows in salt water', goTo: 'seaweed' },
-                  'b': { text: 'does not grow in salt water', goTo: 'water-lily' }
-                },
-                '3': {
-                  'a': { text: 'real plant', goTo: 4 },
-                  'b': { text: 'not a real plant', goTo: 'astroturf' }
-                },
-                '4': {
-                  'a': { text: 'grows more than 50 m tall', goTo: 'fir tree' },
-                  'b': { text: 'grows less than 50 m tall', goTo: 5 }
-                },
-                '5': {
-                  'a': { text: 'produces yellow flowers', goTo: 'dandelion' },
-                  'b': { text: 'does not produce yellow flowers', goTo: 'apple tree' }
-                }
-            };
-
-        expect(setDichotomousKey).toHaveBeenCalledWith(expected);
+        expect(setDichotomousKey).toHaveBeenCalledWith(expectedKey);
     });
 
 
