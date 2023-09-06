@@ -274,8 +274,8 @@ String needs to be transformed on submit to correct certain irregularities
 
 - [X] Shall correctly replace ellipsis with periods
 - [ ] Shall correctly add a dot after numbers followed by a letter
-- [ ] Shall correctly add spaces before and after sequences of periods
-- [ ] Shall ensure that every (number).(character) is followed by a period
+- [X] Shall correctly add spaces before and after sequences of periods
+- [X] Shall ensure that every (number).(character) is followed by a period
 
 ### Progress:
 TODO

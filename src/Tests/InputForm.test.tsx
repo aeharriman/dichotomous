@@ -57,6 +57,14 @@ const expectedKey: KeyObject  = {
     }
 };
 
+const correctParsedSmallKey: KeyObject = {
+    '1': { a: { text: 'one', goTo: 2 }, b: { text: 'two', goTo: 'twodone' } },
+    '2': {
+        a: { text: 'three', goTo: 'threedone' },
+        b: { text: 'four', goTo: 'fourdone' }
+    }
+}
+
 describe('<InputForm />', () => {
     const mockDichotomousKey: KeyObject = {};
     const setDichotomousKey = jest.fn();
@@ -137,14 +145,6 @@ describe('<InputForm />', () => {
 2.a. three …… threedone
 2.b. four .... fourdone`;
 
-        const correctParsed: KeyObject = {
-            '1': { a: { text: 'one', goTo: 2 }, b: { text: 'two', goTo: 'twodone' } },
-            '2': {
-                a: { text: 'three', goTo: 'threedone' },
-                b: { text: 'four', goTo: 'fourdone' }
-            }
-        }
-
         render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
 
         let element = screen.getByPlaceholderText(/1.a. found in water/) as HTMLTextAreaElement;
@@ -154,7 +154,7 @@ describe('<InputForm />', () => {
         const submitButton = screen.getByRole('button', { name: 'Submit' });
         await userEvent.click(submitButton);
 
-        expect(setDichotomousKey).toHaveBeenCalledWith(correctParsed);
+        expect(setDichotomousKey).toHaveBeenCalledWith(correctParsedSmallKey);
     });
 
     it('should parse correctly when missing dot after numbers followed by a letter', async () => {
@@ -163,14 +163,6 @@ describe('<InputForm />', () => {
 2.a three .... threedone
 2.b. four .... fourdone`;
 
-        const correctParsed: KeyObject = {
-            '1': { a: { text: 'one', goTo: 2 }, b: { text: 'two', goTo: 'twodone' } },
-            '2': {
-                a: { text: 'three', goTo: 'threedone' },
-                b: { text: 'four', goTo: 'fourdone' }
-            }
-        }
-
         render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
 
         let element = screen.getByPlaceholderText(/1.a. found in water/) as HTMLTextAreaElement;
@@ -180,7 +172,7 @@ describe('<InputForm />', () => {
         const submitButton = screen.getByRole('button', { name: 'Submit' });
         await userEvent.click(submitButton);
 
-        expect(setDichotomousKey).toHaveBeenCalledWith(correctParsed);
+        expect(setDichotomousKey).toHaveBeenCalledWith(correctParsedSmallKey);
     });
 
     it('Shall parse correctly when missing spaces around separator dots', async () => {
@@ -189,13 +181,23 @@ describe('<InputForm />', () => {
 2.a three…threedone
 2.b. four .... fourdone`;
 
-        const correctParsed: KeyObject = {
-            '1': { a: { text: 'one', goTo: 2 }, b: { text: 'two', goTo: 'twodone' } },
-            '2': {
-                a: { text: 'three', goTo: 'threedone' },
-                b: { text: 'four', goTo: 'fourdone' }
-            }
-        }
+        render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
+
+        let element = screen.getByPlaceholderText(/1.a. found in water/) as HTMLTextAreaElement;
+        fireEvent.change(element, { target: { value: smallKey } });
+
+
+        const submitButton = screen.getByRole('button', { name: 'Submit' });
+        await userEvent.click(submitButton);
+
+        expect(setDichotomousKey).toHaveBeenCalledWith(correctParsedSmallKey);
+    });
+
+    it('Shall parse correctly when missing a period between number and letter', async () => {
+        const smallKey: string = `1.a. one .... 2
+1.b. two....twodone
+2a three…threedone
+2b. four .... fourdone`;
 
         render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
 
@@ -206,9 +208,7 @@ describe('<InputForm />', () => {
         const submitButton = screen.getByRole('button', { name: 'Submit' });
         await userEvent.click(submitButton);
 
-        expect(setDichotomousKey).toHaveBeenCalledWith(correctParsed);
+        expect(setDichotomousKey).toHaveBeenCalledWith(correctParsedSmallKey);
     });
-
-
 
 });
