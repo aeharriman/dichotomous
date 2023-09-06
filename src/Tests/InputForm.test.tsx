@@ -73,7 +73,7 @@ describe('<InputForm />', () => {
         mockAxios.get.mockResolvedValue({ data: [] });
     });
 
-    it('Should render all relevant components without error', async () => {
+    it('should render all relevant components without error', async () => {
         render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
 
         await waitFor(() => {
@@ -86,7 +86,7 @@ describe('<InputForm />', () => {
     });
 
 
-    it('Should allow text input in the textarea', async () => {
+    it('should allow text input in the textarea', async () => {
         render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey}/>);
 
         let element = screen.getByText(/1.a. found in water/) as HTMLTextAreaElement;
@@ -139,13 +139,13 @@ describe('<InputForm />', () => {
         expect(setDichotomousKey).toHaveBeenCalledWith(expectedKey);
     });
 
-    it('Should parse correctly when dots are ellipsis characters', async () => {
+    it('should parse correctly when dots are ellipsis characters', async () => {
+        render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
+
         const smallKey: string = `1.a. one .... 2
 1.b. two … twodone
 2.a. three …… threedone
 2.b. four .... fourdone`;
-
-        render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
 
         let element = screen.getByPlaceholderText(/1.a. found in water/) as HTMLTextAreaElement;
         fireEvent.change(element, { target: { value: smallKey } });
@@ -158,16 +158,15 @@ describe('<InputForm />', () => {
     });
 
     it('should parse correctly when missing dot after numbers followed by a letter', async () => {
+        render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
+
         const smallKey: string = `1.a. one .... 2
 1.b two .... twodone
 2.a three .... threedone
 2.b. four .... fourdone`;
 
-        render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
-
         let element = screen.getByPlaceholderText(/1.a. found in water/) as HTMLTextAreaElement;
         fireEvent.change(element, { target: { value: smallKey } });
-
 
         const submitButton = screen.getByRole('button', { name: 'Submit' });
         await userEvent.click(submitButton);
@@ -175,14 +174,14 @@ describe('<InputForm />', () => {
         expect(setDichotomousKey).toHaveBeenCalledWith(correctParsedSmallKey);
     });
 
-    it('Shall parse correctly when missing spaces around separator dots', async () => {
+    it('should parse correctly when missing spaces around separator dots', async () => {
+        render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
+
         const smallKey: string = `1.a. one .... 2
 1.b two....twodone
 2.a three…threedone
 2.b. four .... fourdone`;
 
-        render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
-
         let element = screen.getByPlaceholderText(/1.a. found in water/) as HTMLTextAreaElement;
         fireEvent.change(element, { target: { value: smallKey } });
 
@@ -193,13 +192,13 @@ describe('<InputForm />', () => {
         expect(setDichotomousKey).toHaveBeenCalledWith(correctParsedSmallKey);
     });
 
-    it('Shall parse correctly when missing a period between number and letter', async () => {
+    it('should parse correctly when missing a period between number and letter', async () => {
+        render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
+
         const smallKey: string = `1.a. one .... 2
 1.b. two....twodone
 2a three…threedone
 2b. four .... fourdone`;
-
-        render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
 
         let element = screen.getByPlaceholderText(/1.a. found in water/) as HTMLTextAreaElement;
         fireEvent.change(element, { target: { value: smallKey } });
