@@ -48,8 +48,6 @@ describe('<InputForm />', () => {
     });
 
     it('should call setDichotomousKey with a non-empty form', async () => {
-        const handleSubmitSpy = jest.fn();
-
         render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
 
         const submitButton = screen.getByRole('button', { name: 'Submit' });
