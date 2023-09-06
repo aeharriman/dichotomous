@@ -235,6 +235,7 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
     }
 
     const handleSubmit = () => {
+        console.log("handleSubmit called when form was:" + form);
         if (form !== "") {
             setDichotomousKey(getFinalKey(process(form)));
         } else {
