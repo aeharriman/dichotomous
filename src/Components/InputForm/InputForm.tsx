@@ -18,7 +18,9 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
 
     const { user, isAuthenticated, getAccessTokenSilently } = useAuth0(); // Auth0 hook to get the access token
 
-    const placeholder = `1.a. found in water ................................. 2
+    const [activeKeys, setActiveKeys] = useState<NamedStringKey[]>([{
+        name: 'default',
+        key: `1.a. found in water ................................. 2
 
 2.a. grows in salt water ................................. seaweed
         
@@ -36,11 +38,7 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
         
 5.b. does not produce yellow flowers ..........................apple tree
         
-3.b. not a real plant ............................... astroturf`;
-
-    const [activeKeys, setActiveKeys] = useState<NamedStringKey[]>([{
-        name: 'default',
-        key: placeholder},
+3.b. not a real plant ............................... astroturf`},
 
 {
     name: 'tab1',
@@ -89,13 +87,33 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
 4.b. red ......................... cardinal`,
     }]);
 
+    const placeholder = `1.a. found in water ................................. 2
+
+2.a. grows in salt water ................................. seaweed
+        
+2.b. does not grow in salt water .............................. water-lily
+        
+1.b. found on land ................................ 3
+        
+3.a. real plant ....................... 4
+        
+4.a. grows more than 50 m tall .................. fir tree
+        
+4.b. grows less than 50 m tall ............................ 5
+        
+5.a. produces yellow flowers ............................... dandelion
+        
+5.b. does not produce yellow flowers ..........................apple tree
+        
+3.b. not a real plant ............................... astroturf`;
+
     const activeDKey: NamedStringKey | undefined = activeKeys.find(tab => tab.name === activeTab);
 
 
     // Making the text displayed in the form show the variable changed by editing the form
     const [form, setForm] = useState('')
 
-    const handleFormChange = (event:ChangeEvent<HTMLInputElement>) => {
+    const handleFormChange = (event:ChangeEvent<HTMLTextAreaElement>) => {
         setForm(event.target.value)
     }
 
