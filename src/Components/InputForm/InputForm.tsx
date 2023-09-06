@@ -154,7 +154,7 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
         processed = processed.replace(/(\w)(\.{2,})(\w)/g, '$1 $2 $3');
 
         // Ensure that every (number).(character) is followed by a period
-        // processed = processed.replace(/(\d\.[a-z])([^.]|$)/g, '$1.$2');
+        processed = processed.replace(/(\d\.[a-z])([^.]|$)/g, '$1.$2');
 
         return processed;
       }
