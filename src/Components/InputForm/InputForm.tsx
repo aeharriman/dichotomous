@@ -145,10 +145,10 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
 
     function process(input: string): string {
         // Replace ellipsis with periods
-        // let processed = input.replace(/…/g, '...');
+        let processed = input.replace(/…/g, '...');
 
         // Add a dot after number followed by letter or character
-        let processed = input.replace(/(\d)([a-z])/g, '$1.$2');
+        processed = processed.replace(/(\d)([a-z])/g, '$1.$2');
 
         // Add a space before and after sequence of periods
         processed = processed.replace(/(\w)(\.{2,})(\w)/g, '$1 $2 $3');
