@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import {fireEvent, render, screen, waitFor} from "@testing-library/react";
 import InputForm from "../Components/InputForm/InputForm";
 import { KeyObject } from "../Utils/Interfaces";
 import axios from "axios";
@@ -56,8 +56,19 @@ describe('<InputForm />', () => {
         expect(setDichotomousKey).toHaveBeenCalled();
     });
 
-    it('should call setDichotomousKey with the correct key from the selected tab if form empty', async () => {
+    it('should not change anything and log in console when submit is clicked with form empty', async () => {
+        const logSpy = jest.spyOn(console, 'log').mockImplementation();
+        render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
 
+        let element = screen.getByText(/1.a. found in water/) as HTMLTextAreaElement;
+        fireEvent.change(element, { target: { value: '' } });
+
+        const submitButton = screen.getByRole('button', { name: 'Submit' });
+        await userEvent.click(submitButton);
+
+        expect(logSpy).toHaveBeenCalledWith('Form cannot be submitted when empty');
+        expect(element.value).toBe('');
+        expect(element).toBeInTheDocument();
     });
 
 

@@ -239,7 +239,7 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
         if (form !== "") {
             setDichotomousKey(getFinalKey(process(form)));
         } else {
-            console.log("Tab selection logic not working as expected")
+            console.log("Form cannot be submitted when empty")
         }
     }
 
