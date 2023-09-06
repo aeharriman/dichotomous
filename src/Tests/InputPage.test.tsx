@@ -10,6 +10,7 @@ const mockedUseAuth0 = useAuth0 as jest.MockedFunction<typeof useAuth0>;
 
 describe('InputPage Component', () => {
 
+    // Could have used "Shallow" from enzyme to prevent indirectly testing child components
     beforeEach(() => {
         // This is mocking an Auth0ContextInterface, which is what the useAuth0 hook returns
         mockedUseAuth0.mockReturnValue({

@@ -238,11 +238,11 @@ Form validation and submission needs to work as expected
 ### Shall:
 - [ ] setDichotomousKey, when a valid dichotomous key string is in the textarea, shall be called with a KeyObject on submit
 - [ ] Shall set the dichotomousKey state correctly upon submission
+- [X] Clicking submit shall call setDichotomousKey with a non-empty form
+- [ ] Clicking submit shall do nothing if form empty
+- [X] Shall allow text input in the textarea
 
 [//]: # (- [ ] Shall call handleSubmit when submit button clicked)
-- [X] Clicking submit shall call setDichotomousKey with a non-empty form
-- [ ] Clicking submit shall call setDichotomousKey with the correct key from the selected tab if form empty
-- [X] Shall allow text input in the textarea
 
 
 ### Progress:
