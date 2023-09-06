@@ -272,7 +272,7 @@ String needs to be transformed on submit to correct certain irregularities
 
 ### Shall:
 
-- [ ] Shall correctly replace ellipsis with periods
+- [X] Shall correctly replace ellipsis with periods
 - [ ] Shall correctly add a dot after numbers followed by a letter
 - [ ] Shall correctly add spaces before and after sequences of periods
 - [ ] Shall ensure that every (number).(character) is followed by a period
@@ -337,4 +337,10 @@ Completed 9/5/23
 Already tested before this was written:
 LoginButton
 LogoutButton
+---
+Future plans for V2 to update to if all tests done :
+- Add error handling
+- Rework state and methods into hooks or redux
+- Test more granularly now that you can mock those
+- add Validation on form so you can't submit an invalid one
 

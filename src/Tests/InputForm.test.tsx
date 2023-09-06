@@ -131,5 +131,31 @@ describe('<InputForm />', () => {
         expect(setDichotomousKey).toHaveBeenCalledWith(expectedKey);
     });
 
+    it('Shall parse correctly when dots are ellipsis characters', async () => {
+        const smallKey: string = `1.a. one .... 2
+1.b. two … twodone
+2.a. three …… threedone
+2.b. four .... fourdone`;
+
+        const correctParsed: KeyObject = {
+            '1': { a: { text: 'one', goTo: 2 }, b: { text: 'two', goTo: 'twodone' } },
+            '2': {
+                a: { text: 'three', goTo: 'threedone' },
+                b: { text: 'four', goTo: 'fourdone' }
+            }
+        }
+
+        render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
+
+        let element = screen.getByPlaceholderText(/1.a. found in water/) as HTMLTextAreaElement;
+        fireEvent.change(element, { target: { value: smallKey } });
+
+
+        const submitButton = screen.getByRole('button', { name: 'Submit' });
+        await userEvent.click(submitButton);
+
+        expect(setDichotomousKey).toHaveBeenCalledWith(correctParsed);
+    });
+
 
 });
