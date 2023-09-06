@@ -148,7 +148,7 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
         let processed = input.replace(/…/g, '...');
 
         // Add a dot after number followed by letter or character
-        // processed = processed.replace(/(\d)([a-z])/g, '$1.$2');
+        processed = processed.replace(/(\d)([a-z])/g, '$1.$2');
 
         // Add a space before and after sequence of periods
         // Test showed this to unnecessary
