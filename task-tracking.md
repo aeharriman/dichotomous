@@ -273,12 +273,12 @@ String needs to be transformed on submit to correct certain irregularities
 ### Shall:
 
 - [X] Shall correctly replace ellipsis with periods
-- [ ] Shall correctly add a dot after numbers followed by a letter
+- [X] Shall correctly add a dot after numbers followed by a letter
 - [X] Shall correctly add spaces before and after sequences of periods
 - [X] Shall ensure that every (number).(character) is followed by a period
 
 ### Progress:
-TODO
+Completed 9/6/23
 
 ---
 
