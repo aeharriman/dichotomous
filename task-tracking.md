@@ -10,11 +10,15 @@ ButtonTree Component
 State variables need to initialize as expected
 
 ### Shall:
-- [ ] Shall set `currentIndex` to 1 initially
-- [ ] Shall set `isDone` to `false` initially
-- [ ] Shall set `isStart` to `true` initially
-- [ ] Shall set `finalSelection` to an empty string initially
-- [ ] Shall set `history` to an empty array initially
+
+- [ ] When rendered, should render buttons with text from first node from dichotomousKey it was rendered with
+- [ ] When on final node, should render final selection in an h1 instead of buttons
+
+[//]: # (- [ ] Shall set `currentIndex` to 1 initially)
+[//]: # (- [ ] Shall set `isDone` to `false` initially)
+[//]: # (- [ ] Shall set `isStart` to `true` initially)
+[//]: # (- [ ] Shall set `finalSelection` to an empty string initially)
+[//]: # (- [ ] Shall set `history` to an empty array initially)
 
 ### Progress:
 TODO
@@ -39,9 +43,10 @@ TODO
 Need a button that brings the button tree to the previous state
 
 ### Shall:
-- [ ] Shall update `currentIndex` to the last element in `history` when `handlePrevious` is invoked
-- [ ] Shall update `history` by removing its last element when `handlePrevious` is invoked
-- [ ] Shall set `isDone` to `false` when `handlePrevious` is invoked
+
+[//]: # (- [ ] Shall update `currentIndex` to the last element in `history` when `handlePrevious` is invoked)
+[//]: # (- [ ] Shall update `history` by removing its last element when `handlePrevious` is invoked)
+[//]: # (- [ ] Shall set `isDone` to `false` when `handlePrevious` is invoked)
 - [ ] Page shall revert to previous state when `Previous` button is clicked
 
 ### Progress:
@@ -53,10 +58,11 @@ TODO
 Need to keep track of whether page is on the first node so that previous button shows up
 
 ### Shall:
-- [ ] Shall set `isStart` to `true` when `history.length` is not 0
-- [ ] Shall set `isStart` to `false` when `history.length` is 0
-- [ ] `Previous` button shall be on page when `history.length` is not 0 and isStart is false
-- [ ] `Previous` button shall not be on page when `history.length` is 0 isStart is true
+
+[//]: # (- [ ] Shall set `isStart` to `true` when `history.length` is not 0)
+[//]: # (- [ ] Shall set `isStart` to `false` when `history.length` is 0)
+- [ ] `Previous` button shall be on page when not on first button node
+- [ ] `Previous` button shall not be on page when on first button node
 
 ### Progress:
 TODO
@@ -67,8 +73,9 @@ TODO
 Need to advance the index of the dichotomous key based on what generated button is clicked
 
 ### Shall:
-- [ ] Shall update `currentIndex` based on the `goTo` value of the selected subKey if it is a number
-- [ ] Shall update `finalSelection` and set `isDone` to `true` if the `goTo` value of the selected subKey is a string
+
+[//]: # (- [ ] Shall update `currentIndex` based on the `goTo` value of the selected subKey if it is a number)
+[//]: # (- [ ] Shall update `finalSelection` and set `isDone` to `true` if the `goTo` value of the selected subKey is a string)
 - [ ] Page shall generate buttons based on the next node for the previous button that was clicked.
 
 ### Progress:
@@ -129,28 +136,19 @@ IconProfile Component
 ---
 
 ### Name:
-Profile visibility needs to be managed by clicking the profile button
-
-### Shall:
-- [ ] Shall initially set `isProfileVisible` state to `false`
-- [ ] Shall set `isProfileVisible` to `true` when `handleIconClick` is invoked
-- [ ] Shall set `isProfileVisible` to `false` when `handleClose` is invoked
-
-### Progress:
-TODO
-
----
-
-### Name:
 User interface needs to show and close modal properly based on SVG button
 
 ### Shall:
 - [ ] Shall display an SVG icon to represent the profile
-- [ ] Shall render a Modal when `isProfileVisible` is `true`
-- [ ] Shall not render a Modal when `isProfileVisible` is `false`
-- [ ] Shall open the modal when the profile button is clicked
+- [ ] Shall render a Modal when icon is clicked
 - [ ] Shall close the Modal when the "Close" button is clicked
 - [ ] Shall close the Modal when the Modal's header X close button is clicked
+
+[//]: # (- [ ] Shall render a Modal when `isProfileVisible` is `true`)
+[//]: # (- [ ] Shall not render a Modal when `isProfileVisible` is `false`)
+[//]: # (- [ ] Shall initially set `isProfileVisible` state to `false`)
+[//]: # (- [ ] Shall set `isProfileVisible` to `true` when `handleIconClick` is invoked)
+[//]: # (- [ ] Shall set `isProfileVisible` to `false` when `handleClose` is invoked)
 
 ### Progress:
 TODO
@@ -190,6 +188,7 @@ TODO
 Needs to show details for the user
 
 ### Shall:
+
 - [ ] Shall display the user's picture when `isAuthenticated` and `user` are both `true`
 - [ ] Shall display the user's name when `isAuthenticated` and `user` are both `true`
 - [ ] Shall display the user's email when `isAuthenticated` and `user` are both `true`
@@ -237,10 +236,10 @@ TODO
 Form validation and submission needs to work as expected
 
 ### Shall:
-- [ ] Shall validate that the form is not empty before allowing submission
-- [ ] Shall correctly parse a valid dichotomous key string into a KeyObject on submit
+- [ ] setDichotomousKey, when a valid dichotomous key string is in the textarea, shall be called with a KeyObject on submit
 - [ ] Shall set the dichotomousKey state correctly upon submission
-- [ ] Shall call handleSubmit when submit button clicked
+
+[//]: # (- [ ] Shall call handleSubmit when submit button clicked)
 - [X] Clicking submit shall call setDichotomousKey with a non-empty form
 - [ ] Clicking submit shall call setDichotomousKey with the correct key from the selected tab if form empty
 - [X] Shall allow text input in the textarea
@@ -255,10 +254,14 @@ TODO
 Tabs functionality needs to work so that the correct tabs are associated with the correct detail
 
 ### Shall:
-- [ ] Shall correctly display tabs for each active key present in the activeKeys state
-- [ ] Shall set the `activeTab` state to the clicked tab's event key
-- [ ] Shall update the `form` state when a new tab is selected to reflect the selected key's content
-- [ ] Shall automatically select the first tab as the default active tab
+
+- [ ] Clicking on tab1 shall cause fish key to be in value of textarea
+- [ ] If nothing clicked, found in water key shall be in value of textarea
+
+[//]: # (- [ ] Shall correctly display tabs for each active key present in the activeKeys state)
+[//]: # (- [ ] Shall set the `activeTab` state to the clicked tab's event key)
+[//]: # (- [ ] Shall update the `form` state when a new tab is selected to reflect the selected key's content)
+[//]: # (- [ ] Shall automatically select the tab named `default` as the default active tab)
 
 ### Progress:
 TODO
@@ -266,9 +269,10 @@ TODO
 ---
 
 ### Name:
-The process function that transforms the string needs to correct certain irregularities
+String needs to be transformed on submit to correct certain irregularities
 
 ### Shall:
+
 - [ ] Shall correctly replace ellipsis with periods
 - [ ] Shall correctly add a dot after numbers followed by a letter
 - [ ] Shall correctly add spaces before and after sequences of periods
