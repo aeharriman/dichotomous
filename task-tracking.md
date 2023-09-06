@@ -3,11 +3,11 @@
 Task tracking started on 9/5/23.
 
 ---
-## ButtonTree
+ButtonTree Component
 ---
 
 ### Name:
-ButtonTree - Initial State Management
+State variables need to initialize as expected
 
 ### Shall:
 - [ ] Shall set `currentIndex` to 1 initially
@@ -22,10 +22,13 @@ TODO
 ---
 
 ### Name:
-ButtonTree - handleGoBack Function
+Need a button that sets dichotomousKey state object to empty
 
 ### Shall:
 - [ ] Shall set `dichotomousKey` to an empty object when `handleGoBack` is invoked
+- [ ] Page shall revert to input form when `Go back to key entry page` button is clicked 
+- [ ] Shall display the "Go back to key entry page" button always
+
 
 ### Progress:
 TODO
@@ -33,12 +36,13 @@ TODO
 ---
 
 ### Name:
-ButtonTree - handlePrevious Function
+Need a button that brings the button tree to the previous state
 
 ### Shall:
 - [ ] Shall update `currentIndex` to the last element in `history` when `handlePrevious` is invoked
 - [ ] Shall update `history` by removing its last element when `handlePrevious` is invoked
 - [ ] Shall set `isDone` to `false` when `handlePrevious` is invoked
+- [ ] Page shall revert to previous state when `Previous` button is clicked
 
 ### Progress:
 TODO
@@ -46,11 +50,13 @@ TODO
 ---
 
 ### Name:
-ButtonTree - useEffect Functionality
+Need to keep track of whether page is on the first node so that previous button shows up
 
 ### Shall:
 - [ ] Shall set `isStart` to `true` when `history.length` is not 0
 - [ ] Shall set `isStart` to `false` when `history.length` is 0
+- [ ] `Previous` button shall be on page when `history.length` is not 0 and isStart is false
+- [ ] `Previous` button shall not be on page when `history.length` is 0 isStart is true
 
 ### Progress:
 TODO
@@ -58,12 +64,12 @@ TODO
 ---
 
 ### Name:
-ButtonTree - handleSelection Function
+Need to advance the index of the dichotomous key based on what generated button is clicked
 
 ### Shall:
 - [ ] Shall update `currentIndex` based on the `goTo` value of the selected subKey if it is a number
 - [ ] Shall update `finalSelection` and set `isDone` to `true` if the `goTo` value of the selected subKey is a string
-- [ ] Shall throw an error gracefully if the `goTo` value is neither a string nor a number
+- [ ] Page shall generate buttons based on the next node for the previous button that was clicked.
 
 ### Progress:
 TODO
@@ -71,72 +77,30 @@ TODO
 ---
 
 ### Name:
-ButtonTree - createButtons Function
+Buttons need to be generated based on what key and index state variables are set to
 
 ### Shall:
 - [ ] Shall dynamically create buttons based on the `dichotomousKey` and `currentIndex`
 - [ ] Shall assign the correct text to each button based on the `text` property of each subKey
+- [ ] Page shall display the correct buttons for the current index
+
 
 ### Progress:
 TODO
 
 ---
-
-### Name:
-ButtonTree - UI/UX
-
-### Shall:
-- [ ] Shall display the "Previous" button only when `isStart` is true
-- [ ] Shall display the "Go back to key entry page" button always
-
-### Progress:
-TODO
-
+Description Component
 ---
-## Description
 ---
 
 ### Name:
-Description - Auth0 Integration and State Management
+Need to integrate Auth0 functionality so that profile can be displayed and login/logout can be rendered conditionally
 
 ### Shall:
 - [ ] Shall use `useAuth0` to fetch `user` data
 - [ ] Shall not throw any errors related to Auth0 integration
-
-### Progress:
-TODO
-
----
-
-### Name:
-Description - UI Layout
-
-### Shall:
-- [ ] Shall contain a `Row` with two `Col` elements
-- [ ] Shall display the title "Dichotomous" in the first `Col`
-- [ ] Shall display the description "Turn a textual dichotomous key into an interactive one" in the first `Col`
-
-### Progress:
-TODO
-
----
-
-### Name:
-Description - User Not Logged In
-
-### Shall:
 - [ ] Shall display the `LoginButton` when `user` is `null` or `undefined`
 - [ ] Shall not display `IconProfile` and `LogoutButton` when `user` is `null` or `undefined`
-
-### Progress:
-TODO
-
----
-
-### Name:
-Description - User Logged In
-
-### Shall:
 - [ ] Shall display `IconProfile` and `LogoutButton` when `user` is not `null` or `undefined`
 - [ ] Shall not display `LoginButton` when `user` is not `null` or `undefined`
 
@@ -146,21 +110,26 @@ TODO
 ---
 
 ### Name:
-Description - Responsive Design
+User interface needs to have layout with title and description on the left and login/logout stuff on the right
 
 ### Shall:
-- [ ] Shall maintain a responsive layout across different screen sizes, adjusting `Col` sizes as per Bootstrap classes
+- [ ] Shall contain a `Row` with two `Col` elements
+- [ ] Shall display the title "Dichotomous" in the first `Col`
+- [ ] Shall display the description "Turn a textual dichotomous key into an interactive one" in the first `Col`
+- [ ] Shall display login button in the second `Col` when user is logged out
+- [ ] Shall display logout button in the second `Col` when user is logged in
+- [ ] Shall display profile button in the second `Col` when user is logged in
 
 ### Progress:
 TODO
 
-
 ---
-## IconProfile
+IconProfile Component
+---
 ---
 
 ### Name:
-IconProfile - State Management
+Profile visibility needs to be managed by clicking the profile button
 
 ### Shall:
 - [ ] Shall initially set `isProfileVisible` state to `false`
@@ -173,12 +142,15 @@ TODO
 ---
 
 ### Name:
-IconProfile - UI Elements
+User interface needs to show and close modal properly based on SVG button
 
 ### Shall:
 - [ ] Shall display an SVG icon to represent the profile
 - [ ] Shall render a Modal when `isProfileVisible` is `true`
 - [ ] Shall not render a Modal when `isProfileVisible` is `false`
+- [ ] Shall open the modal when the profile button is clicked
+- [ ] Shall close the Modal when the "Close" button is clicked
+- [ ] Shall close the Modal when the Modal's header X close button is clicked
 
 ### Progress:
 TODO
@@ -186,7 +158,7 @@ TODO
 ---
 
 ### Name:
-IconProfile - Modal Content
+Modal needs to have title, profile, and close button
 
 ### Shall:
 - [ ] Shall display "Profile" as the title of the Modal
@@ -198,36 +170,12 @@ TODO
 
 ---
 
-### Name:
-IconProfile - Modal Interaction
-
-### Shall:
-- [ ] Shall close the Modal when the "Close" button is clicked
-- [ ] Shall close the Modal when the Modal's header close button is clicked
-
-### Progress:
-TODO
-
+Profile Component
+---
 ---
 
 ### Name:
-IconProfile - Auth0 Integration
-
-### Shall:
-- [ ] Shall not throw any errors related to Auth0
-- [ ] Shall use `useAuth0` without causing console errors
-
-### Progress:
-TODO
-
-
----
-
-## Profile
----
-
-### Name:
-Profile - Loading State
+Needs to display a loading icon when profile is loading
 
 ### Shall:
 - [ ] Shall display "Loading..." when `isLoading` is `true`
@@ -239,22 +187,12 @@ TODO
 ---
 
 ### Name:
-Profile - Authenticated State
+Needs to show details for the user
 
 ### Shall:
 - [ ] Shall display the user's picture when `isAuthenticated` and `user` are both `true`
 - [ ] Shall display the user's name when `isAuthenticated` and `user` are both `true`
 - [ ] Shall display the user's email when `isAuthenticated` and `user` are both `true`
-
-### Progress:
-TODO
-
----
-
-### Name:
-Profile - Unauthenticated State
-
-### Shall:
 - [ ] Shall return `null` when `isAuthenticated` is `false`
 - [ ] Shall return `null` when `user` is `null` or `undefined`
 
@@ -264,7 +202,7 @@ TODO
 ---
 
 ### Name:
-Profile - Auth0 Integration
+Needs to integrate with Auth0 to get the user details
 
 ### Shall:
 - [ ] Shall use `useAuth0` to fetch `user`, `isAuthenticated`, and `isLoading` without causing console errors
@@ -274,17 +212,21 @@ TODO
 
 
 ---
-## InputForm
+InputForm Component
+---
 ---
 
 ### Name:
-InputForm - Auth0 User Authentication
+Needs to integrate with auth0 to make decisions based on authentication details
 
 ### Shall:
 - [ ] Shall not throw any errors related to Auth0 user authentication in the console
 - [ ] Shall successfully retrieve an access token when a user is authenticated
 - [ ] Shall not make an axios request when the user is not authenticated
 - [ ] Shall correctly request a new access token when the existing one expires
+- [X] Shall mock `useAuth0` function to simulate auth0 functionality
+- [X] Shall run all tests without throwing "Failed to fetch keys: Error: You forgot to wrap your component in <Auth0Provider>.
+  at getAccessTokenSilently"
 
 ### Progress:
 TODO
@@ -292,13 +234,17 @@ TODO
 ---
 
 ### Name:
-InputForm - Validation and Submission
+Form validation and submission needs to work as expected
 
 ### Shall:
 - [ ] Shall validate that the form is not empty before allowing submission
-- [ ] Shall correctly parse the entered dichotomous key string into a KeyObject on submit
+- [ ] Shall correctly parse a valid dichotomous key string into a KeyObject on submit
 - [ ] Shall set the dichotomousKey state correctly upon submission
-- [ ] Shall console log "Tab selection logic not working as expected" only when an error occurs in tab selection
+- [ ] Shall call handleSubmit when submit button clicked
+- [X] Clicking submit shall call setDichotomousKey with a non-empty form
+- [ ] Clicking submit shall call setDichotomousKey with the correct key from the selected tab if form empty
+- [X] Shall allow text input in the textarea
+
 
 ### Progress:
 TODO
@@ -306,7 +252,7 @@ TODO
 ---
 
 ### Name:
-InputForm - Tabs Functionality
+Tabs functionality needs to work so that the correct tabs are associated with the correct detail
 
 ### Shall:
 - [ ] Shall correctly display tabs for each active key present in the activeKeys state
@@ -320,7 +266,7 @@ TODO
 ---
 
 ### Name:
-InputForm - Process Function Tests
+The process function that transforms the string needs to correct certain irregularities
 
 ### Shall:
 - [ ] Shall correctly replace ellipsis with periods
@@ -334,7 +280,7 @@ TODO
 ---
 
 ### Name:
-InputForm - Axios Integration
+Axios needs to be integrated properly and make correct get request
 
 ### Shall:
 - [ ] Shall successfully make a GET request to the given URL
@@ -350,52 +296,42 @@ TODO
 ---
 
 ### Name:
-InputForm - UI/UX
-
+User interface needs to show the correct details
 ### Shall:
 - [X] Shall render all relevant components without error
-- [X] Shall allow text input in the textarea
-- [X] Shall call handleSubmit when submit button clicked
 
 ### Progress:
-TODO
+Completed 9/5/23
 
 
 ---
-## InputPage
+InputPage Component
+---
 ---
 
 ### Name:
-InputPage - Fix axios import error
+Need to fix axios import error: "SyntaxError: Cannot use import statement outside a module"
 
 ### Shall:
 - [X] Shall run all InputPage Component tests without causing "SyntaxError: Cannot use import statement outside a module" on the console
 
 ### Progress:
-Completed - added transformIgnorePatterns for axios to jest in package.json
+Completed - added transformIgnorePatterns for axios to jest in package.json - 9/5/23
 
 ---
 
 ### Name:
-InputPage - rendering
+Conditional rendering of elements on page needs to be determined by length of dichotomousKey object in state
 
 ### Shall:
-- [X] Shall render description and input form when the state of the dichotomousKey is at length 0
-- [X] Shall render description and ButtonTree when the dichotomousKey state is length over 0
+- [X] Shall render Description and InputForm when the state of the dichotomousKey is at length 0
+- [X] Shall render Description and ButtonTree when the dichotomousKey state is length over 0
 
 ### Progress:
-Complete
+Completed 9/5/23
 
 ---
-
-### Name:
-InputForm - Auth0Provider
-
-### Shall:
-- [X] Shall mock `useAuth0` function to simulate auth0 functionality
-- [X] Shall run all tests without throwing "Failed to fetch keys: Error: You forgot to wrap your component in <Auth0Provider>.
-  at getAccessTokenSilently"
-
-### Progress:
-Complete
+Already tested before this was written:
+LoginButton
+LogoutButton
 

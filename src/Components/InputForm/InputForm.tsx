@@ -239,11 +239,7 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
         if (form !== "") {
             setDichotomousKey(getFinalKey(process(form)));
         } else {
-            if (activeDKey) {
-                setDichotomousKey(getFinalKey(activeDKey.key));
-            } else {
-                console.log("Tab selection logic not working as expected")
-            }
+            console.log("Tab selection logic not working as expected")
         }
     }
 
