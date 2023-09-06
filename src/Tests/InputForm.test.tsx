@@ -71,5 +71,37 @@ describe('<InputForm />', () => {
         expect(element).toBeInTheDocument();
     });
 
+    it('should set the dichotomousKey state correctly upon submission', async () => {
+        render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
+
+        const submitButton = screen.getByRole('button', { name: 'Submit' });
+        await userEvent.click(submitButton);
+
+        const expected: KeyObject  = {
+                '1': {
+                  'a': { text: 'found in water', goTo: 2 },
+                  'b': { text: 'found on land', goTo: 3 }
+                },
+                '2': {
+                  'a': { text: 'grows in salt water', goTo: 'seaweed' },
+                  'b': { text: 'does not grow in salt water', goTo: 'water-lily' }
+                },
+                '3': {
+                  'a': { text: 'real plant', goTo: 4 },
+                  'b': { text: 'not a real plant', goTo: 'astroturf' }
+                },
+                '4': {
+                  'a': { text: 'grows more than 50 m tall', goTo: 'fir tree' },
+                  'b': { text: 'grows less than 50 m tall', goTo: 5 }
+                },
+                '5': {
+                  'a': { text: 'produces yellow flowers', goTo: 'dandelion' },
+                  'b': { text: 'does not produce yellow flowers', goTo: 'apple tree' }
+                }
+            };
+
+        expect(setDichotomousKey).toHaveBeenCalledWith(expected);
+    });
+
 
 });
