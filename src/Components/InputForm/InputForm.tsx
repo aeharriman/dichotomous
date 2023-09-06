@@ -123,7 +123,7 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
         if (foundTab) {
             setForm(foundTab.key);
         }
-    }, [activeTab, activeKeys]);
+    }, [activeTab]);
 
     useEffect(() => {
         (async () => {
