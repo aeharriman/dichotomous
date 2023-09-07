@@ -9,7 +9,7 @@ import {Auth0Provider} from "@auth0/auth0-react";
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN || "defaultDomain";
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID || "defaultClientId";
-// const audience = process.env.REACT_APP_AUTH0_AUDIENCE || "defaultAudience";
+const audience = process.env.REACT_APP_AUTH0_AUDIENCE || "defaultAudience";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -24,7 +24,7 @@ root.render(
         domain={domain}
         clientId={clientId}
         authorizationParams={{
-            audience: "https://dichotomous.example.com",
+            audience: audience,
             // The URL to where you'd like to redirect your users after they authenticate with Auth0.
             redirect_uri: "http://localhost:3000/"
         }}
