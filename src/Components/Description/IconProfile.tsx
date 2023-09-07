@@ -2,7 +2,6 @@ import * as React from "react";
 import {useState} from "react";
 import { Modal, Button } from "react-bootstrap";
 import Profile from "./Profile";
-import {useAuth0} from "@auth0/auth0-react";
 
 function IconProfile() {
 

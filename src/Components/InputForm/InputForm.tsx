@@ -16,7 +16,7 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
 
     const [activeTab, setActiveTab] = useState<string>('default');
 
-    const { user, isAuthenticated, getAccessTokenSilently } = useAuth0(); // Auth0 hook to get the access token
+    const { getAccessTokenSilently } = useAuth0(); // Auth0 hook to get the access token
 
     const [activeKeys, setActiveKeys] = useState<NamedStringKey[]>([{
         name: 'default',
@@ -107,8 +107,6 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
         
 3.b. not a real plant ............................... astroturf`;
 
-    const activeDKey: NamedStringKey | undefined = activeKeys.find(tab => tab.name === activeTab);
-
 
     // Making the text displayed in the form show the variable changed by editing the form
     const [form, setForm] = useState('')
@@ -117,13 +115,14 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
         setForm(event.target.value)
     }
 
-    // Sets textarea to "key" from NamedStringKey set by "name" in activeTab
+    // Sets textarea to "key" from NamedStringKey set by "name" in activeTab when active tab changed
     useEffect(() => {
         const foundTab = activeKeys.find(tab => tab.name === activeTab);
         if (foundTab) {
             setForm(foundTab.key);
         }
     }, [activeTab]);
+
 
     useEffect(() => {
         (async () => {
