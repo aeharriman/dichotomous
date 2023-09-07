@@ -4,6 +4,7 @@ import InputForm from "../Components/InputForm/InputForm";
 import { KeyObject } from "../Utils/Interfaces";
 import axios from "axios";
 import userEvent from "@testing-library/user-event";
+import AxiosMockAdapter from "axios-mock-adapter";
 
 jest.mock("@auth0/auth0-react", () => ({
     useAuth0: () => ({
@@ -11,8 +12,14 @@ jest.mock("@auth0/auth0-react", () => ({
     }),
 }));
 
-jest.mock('axios');
-const mockAxios = axios as jest.Mocked<typeof axios>;
+// Chose to use AxiosMockAdapter to give better control over tests regarding axios
+// jest.mock('axios');
+// const mockAxios = axios as jest.Mocked<typeof axios>;
+
+// let mockAxios: AxiosMockAdapter;
+
+const mockAxios = new AxiosMockAdapter(axios);
+
 
 const defaultKeyText: string = `1.a. found in water ................................. 2
 
@@ -69,16 +76,29 @@ describe('<InputForm />', () => {
     const mockDichotomousKey: KeyObject = {};
     const setDichotomousKey = jest.fn();
 
-    beforeEach(() => {
-        mockAxios.get.mockResolvedValue({ data: [] });
+    // beforeEach(() => {
+    //     // mockAxios.get.mockResolvedValue({ data: [] });
+    //     mockAxios = new AxiosMockAdapter(axios);
+    // });
+
+    afterEach(() => {
+        // Reset all request handlers:
+        mockAxios.reset();
+        mockAxios.resetHistory();
     });
 
     it('should render all relevant components without error', async () => {
+        mockAxios.onGet('http://localhost:6565/api/keys').reply(200, [{ name: "Name1", key: "Key1" },
+            { name: "Name2", key: "Key2" }]);
+
         render(<InputForm dichotomousKey={mockDichotomousKey} setDichotomousKey={setDichotomousKey} />);
 
         await waitFor(() => {
-            expect(mockAxios.get).toHaveBeenCalled();
+            expect(mockAxios.history.get.length).toBe(1);
         });
+
+        const tabs = screen.getAllByRole('tab');
+        expect(tabs.length).toBe(5);
 
         expect(screen.getByRole('tablist')).toBeInTheDocument();
         expect(screen.getByRole('textbox')).toBeInTheDocument();
@@ -209,5 +229,16 @@ describe('<InputForm />', () => {
 
         expect(setDichotomousKey).toHaveBeenCalledWith(correctParsedSmallKey);
     });
+
+    it('should successfully make a GET request to the given URL', async () => {
+        mockAxios.onGet('http://localhost:6565/api/keys').reply(200, [{ name: "Name1", key: "Key1" },
+            { name: "Name2", key: "Key2" }]);
+
+        // Initialize component or call function that triggers the useEffect
+        // ...
+
+        // Add your assertions
+    });
+
 
 });

@@ -139,7 +139,7 @@ function InputForm({dichotomousKey, setDichotomousKey}:{dichotomousKey:KeyObject
                 console.error('Failed to fetch keys:', e);
             }
         })();
-    }, [getAccessTokenSilently]);
+    }, []);
 
 
 
